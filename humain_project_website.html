@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The HumAIn Project</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Didot';
+      src: local('Didot'), serif;
+    }
+
+    :root {
+      --background: #111827;
+      --light: #FFEDBC;
+      --bold: #ED4264;
+      --text-title: #F9FAFB;
+      --text-body: #D1D5DB;
+      --text-muted: #9CA3AF;
+      --overlay: #1F2937;
+      --overlay-transparent: rgba(31, 41, 55, 0.8);
+      --overlay-soft: #1A2233;
+      --teal: #2DD4BF;
+    }
+
+    body {
+      /* margin: 100; */
+      font-family: 'IBM Plex Sans', sans-serif;
+      background-color: var(--background);
+      color: var(--text-body);
+      font-size: 1.1em;
+      line-height: 1.6;
+      margin: 0; 
+      overflow-x: hidden
+    }
+
+    h1, h2 {
+      font-family: 'Didot', serif;
+      padding-bottom: 0.1em;
+    }
+
+    h1{
+      text-align: center;
+      font-size: 2.5em;
+      font-family: 'Didot', sans-serif;
+      /* font-weight: 00; */
+
+    }
+
+    h3{
+      text-align: center;
+      font-size: 1.2em;
+      font-family: 'IBM Plex Sans', sans-serif;
+
+    }
+
+    nav {
+   
+      padding: 40px 20px;
+      top: 0;
+    }
+
+    nav div{
+
+      width: 95%;
+      justify-content: flex-end;
+      display: flex;
+
+    }
+
+    nav a {
+      color: var(--text-body);
+      margin-left: 16px;
+      text-decoration: none;
+      font-weight: 400;
+    }
+
+    nav a:hover {
+      color: var(--light);
+    }
+
+    section {
+      padding: 80px 0;
+      width: 100%;
+      /* margin-left: 100px;
+      margin-right: 50px; */
+      padding-left: 60px; 
+      padding-right: 50px; 
+    }
+
+    /* p {
+      padding-left: 80px;
+      padding-right: 50px; 
+
+    } */
+
+    .banner {
+      background-color: var(--background);
+      color: var(--text-body);
+      text-align: center;
+      padding: 140px 20px;
+    }
+
+    .banner img {
+      max-width: 380px;
+      margin-bottom: 20px;
+    }
+
+    .banner h1 {
+      font-size: 1.2em;
+      margin: 0;
+      font-weight: 200;
+      /* font-family: 'Didot', serif; */
+      /* font-style: italic; */
+      font-family: 'IBM Plex Sans', sans-serif;
+      color: var(--text-body);
+    
+    }
+/* 
+    section:not(.banner) p {
+    column-count: 2;
+    column-gap: 50px;
+   } */
+ 
+
+  
+    .intro {
+      /* background-color: var(--overlay-soft); */
+      color: var(--text-body);
+    }
+
+    .light-section {
+      background-color: #1C2538;
+      color: var(--text-body);
+    }
+
+    .intro .button  {
+      margin-left: 5px;
+      margin-right: 20px;
+      margin-top: 2em;
+    }
+
+    h2 {
+      font-size: 2em;
+      color: var(--text-title);
+      margin-bottom: 0px;
+    }
+
+    .card-section {
+      background: url('assets/research_background.png') no-repeat center center/cover;
+      position: relative;
+      /* padding: 60px 30px; */
+      margin-top: 0;
+      overflow: hidden;
+      color: var(--text-title);
+    }
+
+    .card-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, var(--bold), var(--light));
+      opacity: 0.85;
+      z-index: 0;
+    }
+
+    .card-section > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .team-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: center;
+      /* margin-top: 40px; */
+      flex-direction: column;
+      /* grid-template-columns: 1fr; Single column */
+    }
+
+    .team-member {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    margin-bottom: 25px;
+    }
+
+    .team-left {
+    display: flex;
+    flex-direction: column; /* This stacks image and name vertically */
+    align-items: center; /* Centers the image and name */
+    flex-shrink: 0;
+    text-align: center;
+    }
+
+    .team-other {
+    display: flex;
+    /* flex-direction: column;  This stacks image and name vertically */
+    /* align-items: center; Centers the image and name */
+    flex-shrink: 0;
+    /* text-align: center; */
+    }
+    
+    .team-other p {
+      margin-top: 10px; /* Adds space between image and name */
+      /* margin-left: 20px; */
+      margin-right: 10em;
+      justify-content: space-between; 
+      align-items: left;
+      /* font-weight: 600; */
+      color: var(--text-title);
+    }
+
+    .team-left img {
+      width: 225px;
+      height: 225px;
+      border-radius: 0%;
+      object-fit: cover;
+      border: 4px solid var(--bold);
+      object-position: 0% 0%;
+      border-image: linear-gradient(180deg, var(--bold), var(--light)) 1;
+    }
+
+
+    .team-bio {
+      flex: 1; /* Takes up remaining space */
+      padding-top: 2%;
+    }
+
+    .team-bio p {
+      margin: 0; /* Removes default paragraph margins */
+      line-height: 1.5;
+      padding-right: 15%;
+      padding-left: 3%;
+    }
+    .button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 20px;
+
+      background: transparent;
+      color: var(--text-body);
+
+      /* background: linear-gradient(90deg, var(--bold), var(--light)); */
+      /* color: #111827; */
+      font-weight: 500;
+      border-radius: 0px;
+      text-decoration: none;
+
+      border: 2px solid;
+      border-image: linear-gradient(90deg, var(--bold), var(--light)) 1;
+
+      position: relative;
+      transition: color 0.3s ease;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--bold), var(--light));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+    border-radius: 0px; /* Slightly smaller than button border-radius */
+    }
+
+
+
+.button:hover::before {
+    opacity: 1;
+}
+
+.button:hover {
+    color: #111827;
+    border: 2px solid transparent;
+}
+
+    .logo-grid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 60px;
+      margin-top: 40px;
+    }
+
+    .logo-grid img {
+      max-height: 80px;
+      max-width: 160px;
+      object-fit: contain;
+    }
+
+.box {
+  flex: 1;
+  min-width: 300px;
+  padding-right: 7%;
+  padding-bottom: 5%;
+  justify-content: space-between; 
+}
+
+.box p {
+  /* padding-bottom: 5%; */
+  padding-left: 7%;
+
+}
+  
+
+.research-box{
+
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+  
+
+}
+
+.research-box img{
+  /* max-height: 20em;
+  max-width: 22em; */
+ height: 16em;
+ width: 24em;
+}
+
+
+  /* .content-wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 40px;
+  text-align: left;  */
+  /* }    */
+
+  .section-inner {
+  /* max-width: 460px; */
+  margin: 0 auto;
+  /* padding: 50 40px; */
+  text-align: left;
+  padding-left: 8em;
+  padding-right: 8em;
+  padding-top: 0.9em; 
+  /* margin-left: 100px;
+  margin-right: 50px; */
+  display: flex;
+  /* gap: 40px; */
+  flex-wrap: wrap;
+}
+
+.gradient-link {
+    text-decoration: none;
+    display: inline-block; /* Helps with positioning */
+}
+
+.gradient-text {
+    background: linear-gradient(270deg, var(--bold), var(--light));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+/* Hover effect */
+.gradient-link:hover .gradient-text {
+    background: linear-gradient(270deg, var(--light), var(--bold));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.red-text{
+  color: var(--bold);
+}
+
+.epoch-box{
+  min-width: 300px;
+  display: flex;
+  justify-content: left;
+  height: 15em;
+  width: 18em;
+
+}
+
+.distplot img{
+  min-width: 300px;
+  margin-top: 2em;
+  height: 36em;
+}
+
+
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav>
+    <!-- <div><img src="assets/logo_long_simple.png" alt="HumAIn Logo" ></div> -->
+    <div>
+      <a href="#philosophy">Philosophy</a>
+    
+      <a href="#epoch" class="gradient-link"><span class="gradient-text">EPOCH Index</a></span>
+      <a href="#team">Team</a>
+      <a href="#support">Support</a>
+      <a href="#involved">Get Involved</a>
+    </div>
+  </nav>
+
+  <!-- Landing Banner -->
+  <section class="banner">
+    <img src="assets/logo_large.png" alt="HumAIn Logo">
+    <h1>Advancing research at the intersection of AI and human capabilities</h1>
+  </section>
+
+  <!-- Research Philosophy -->
+  <section class="light-section" id="philosophy">
+   
+    <div class="section-inner">
+      <div class="box">
+          <h2>Our Research Philosophy</h2>
+          <a href="#" class="button">Check out HumAIn on the Sloan website</a>
+      </div>
+      <div class="box">
+        <p>At the HumAIn Project, we place people at the center of the conversation about the future of work. Our research seeks to reframe the narrative—moving beyond productivity and automation to develop metrics that reflect the full spectrum of human capabilities. Work is not just an economic activity; it is a source of identity, purpose, and belonging. As AI reshapes the nature of work, it is also reshaping the human experience. By focusing on what makes us distinctly human, we aim to produce evidence and insight that guide policy, education, and innovation toward outcomes that are not only efficient, but equitable and meaningful. The future of work is not solely about technical adaptation—it’s about cultivating the capabilities that allow us to thrive alongside machines, and more importantly, with one another.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why We Need This Research -->
+  <!-- <section id="why">
+    <h2>Why This Research Matters</h2>
+    <div class="section-inner">
+      <p>Because jobs aren’t just economic units—they are a cornerstone of our society. They give us identity, status, purpose, and community. And so when we talk about how AI is changing work, we’re really talking about how it’s changing the human experience.
+        We believe that by focusing on human capabilities, not just machine capabilities, we can build a more accurate, more meaningful picture of this transformation. And in doing so, we can create pathways for shaping the future of work in ways that preserve and even strengthen what matters most.
+       
+        The future of work isn’t just about developing new technical skills. It’s about cultivating the capabilities that make us better at working with machines—but, more importantly, better at working with each other. That’s the future I believe in—and the one I hope we can build together.
+        </p>
+    </div>
+    <div class="section-inner">
+      <h2>Why This Research Matters</h2>
+    </div>
+  </section>  -->
+
+  <!-- EPOCH Paper -->
+  <section class="card-section" id="epoch">
+    <h1>Our Research Areas</h1>
+    <div class="section-inner">
+      <div class="box">
+        <div class="research-box"><img src="assets/future_of_work.png"></div>
+       <h3>AI and the Future of Work</h3>
+      </div>
+      <div class="box">
+        <div class="research-box"><img src="assets/societal_institutions.png"></div>
+        <h3>AI and Social Institutions</h3>
+      </div>
+    </div>
+    
+    <!-- <a href="#" class="button">Read the Paper</a> -->
+  </section>
+
+  <section class="intro" id="featured">
+    <h1>Featured Research</h1>
+  
+    <div class="section-inner">
+      <div class="box">
+        <div class="epoch-box">
+          <img src="assets/epoch_framework.png" style="padding-left: 4%;">
+          
+        </div>
+        <div class="research-box">
+          
+          <p>The EPOCH Framework encapuslates the human capabilities that machines cannot replicate. Using this framework, we developed three metrics:</p>
+            
+        </div>
+        <div class="research-box">
+          <p>
+            <ul>
+            <li>the <span class="red-text"> EPOCH Score </span>, that measures the intentisty of these human capabilites at the task and occupation level</li>
+            <li>the <span class="red-text">Augmentation Score </span>, that measures the potential for humans to work with machines to increase at the occupation level </li>
+            <li>the <span class="red-text">Automation Score </span>, that measures the potential for machines to take over human tasks at the occupation level
+
+            </li>
+  
+          </ul>
+          </p>
+          </div>
+
+        <!-- <a href="#" class="button">Learn More</a> -->
+        <a href="#" class="button">Read the Paper</a>
+        <a href="#" class="button">Read MIT Sloan's article about our work</a> 
+     
+            
+      </div>
+      <div class="box">
+        <div class="distplot">
+          <!-- <img src="assets/epoch_score_dists.png"> -->
+        <img src="assets/epoch_score_dists.png">
+        
+        <!-- <h3>AI and the Future of Work</h3>
+        <p>Our research explores how AI is reshaping the nature of work, focusing on human capabilities and the evolving relationship between workers and technology.</p> -->
+        <!-- <iframe src="./plot.htm" width="800" height="600" frameborder="0"></iframe> -->
+      </div>
+      
+    </div>
+
+  </section>
+
+  <!-- Team -->
+  <section class="light-section" id="team">
+  <h1>Meet the Team</h1>
+  <div class="section-inner">
+      <div class="team-grid">
+        <h2>Leadership</h2>
+          <div class="team-member">
+              <div class="team-left">
+                  <img src="assets/team_isabella.png" alt="Isabella Loaiza">
+                  <p><strong>Isabella Loaiza</strong><br>Co-Lead</p>
+              </div>
+              <div class="team-bio">
+                  <p>Isabella Loaiza is a computational social scientist at the MIT Sloan School of Management who is committed to building an equitable and sustainable future of work. Her research especially focuses on understanding the impact of technology on the future workforce. She also explores AI’s impact on work, workers, and organizational talent practices, with a human-centered approach that emphasizes human-AI complementarities.     <a href="https://isabellaloaiza.squarespace.com/" class="gradient-link" target="_blank" rel="noopener noreferrer"><span class="gradient-text">Learn More ></span></a></p>
+              </div>
+          </div>
+          <div class="team-member">
+              <div class="team-left">
+                  <img src="assets/team_roberto.png" alt="Roberto Rigobon">
+                  <p><strong>Roberto Rigobon</strong><br>Co-Lead</p>
+              </div>
+              <div class="team-bio">
+                  <p>Roberto Rigobon is the Society of Sloan Fellows Professor of Management and a Professor of Applied Economics at the MIT Sloan School of Management. He is also a research associate of the National Bureau of Economic Research, a member of the Census Office. <a href="https://mitsloan.mit.edu/sustainability-initiative/aggregate-confusion-project" class="gradient-link" target="_blank" rel="noopener noreferrer"><span class="gradient-text">Learn More ></span></a></p>
+              </div>
+          </div>
+          <h2>Researchers</h2>
+          <!-- <div class="team-member"> -->
+            <div class="team-other">
+                  <!-- <img src="assets/team_steven.png"> -->
+                  <p><strong>Roberto Vestrelli</strong><br>PhD Student</p>
+                  <p><strong>Jacqueline Yentumi</strong><br>Undergraduate Student</p>
+                  <p><strong>Noely Ireniu Silva</strong><br>Past Member</p>
+              </div>
+              <!-- <div class="team-bio">
+                  <p>Steven Tadelis is the I. James Quillen Chair in Economics at the University of California, Berkeley, and a faculty research fellow at the National Bureau of Economic Research. He is also a co-founder of the Berkeley Center for Long-Term Cybersecurity. <a href="https://tadelis.com/" class="gradient-link" target="_blank" rel="noopener noreferrer"><span class="gradient-text">Learn More ></span></a></p>
+              </div> -->
+      <!-- </div> -->
+  </div>
+</section>
+
+
+  
+  <!-- We're Part Of
+  <section class="light-section">
+    <h2>Partnerships</h2>
+    <div class="logo-grid">
+      <img src="logo1.png" alt="Partner Logo 1">
+      <img src="logo2.png" alt="Partner Logo 2">
+    </div>
+  </section> -->
+
+  <!-- Get Involved -->
+  <section class="intro" id="involved">
+   
+    <div class="section-inner">
+      <div class="box">
+        <h2>Get Involved</h2>
+        <a href="#" class="button">Contact us</a>   
+    </div>
+    
+    
+    <div class="box">
+      <span>The HumAin project is built to foster participation and collaboration across disciplines and beyond academia.</span>
+      <ul>
+      <li><span class="red-text">Student</span> or <span class="red-text">researcher</span> reach out if you'd like to collaborate on a project, join our research community, or contribute your expertise to our ongoing studies.</li>
+      <li><span class="red-text">Organization</span> or  <span class="red-text">foundation</span>, consider partnering with us to support our research or collaborate on specific projects. We also welcome unrestricted gifts to support the overall project, which allows us to broaden our research and share our findings with the widest audience possible.</li>
+      <li><span class="red-text">Multilateral organization</span> and want to learn more about our research, consider partnernig with us and help us shape the future of work through evidence-based insights.</li>
+    <!-- <a href="#" class="button">Join Us</a> -->
+    </div>
+    <!-- Contact us at <a href="mailto:> if you are interested in collaborating with us, or want to support our work.</a> -->
+  </section>
+
+  <!-- <section class="light-section">
+    <h2>Our work has been featured in</h2>
+    <div class="logo-grid">
+      <img src="assets/mit_sloan_logo.png" alt="MIT Sloan Logo">
+      <img src="assets/sloan_sustainability_logo.png" alt="Sloan Sustainability Logo">
+      <img src="assets/mit_logo.png" alt="MIT Logo">
+    </div> -->
+  <!-- Support Us
+  <section class="intro" id="support">
+    <h2>Support Our Work</h2>
+    <p>Your support enables independent, forward-thinking research on how to ensure AI benefits everyone. We welcome donations, collaborations, and partnerships.</p>
+    <a href="#" class="button">Donate or Partner</a>
+  </section> -->
+
+  
+</body>
+</html>
